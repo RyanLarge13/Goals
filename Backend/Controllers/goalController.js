@@ -1,6 +1,5 @@
 const getGoals = (req, res) => {
   res.status(200).send("Got goal.");
-  console.log('Got!')
 };
 
 const setGoal = (req, res) => {

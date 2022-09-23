@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
-import { getGoals, setGoal } = require("../Controllers/goalController.js");
+const { getGoals, setGoal } = require("../Controllers/goalController");
 
 router.get("/", getGoals);
 
-router.post("/", (req, res) => {
-  res.status(200).send("New goal added.");
-});
+router.post("/", setGoal);
 
 router.put("/:id", (req, res) => {
   res.status(200).send(`Goal ${req.params.id} was succesfully updated.`);
