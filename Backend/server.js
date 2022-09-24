@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/goals", require("./Routes/goalRoutes"));
+app.use("/users", require("./Routes/userRoutes"));
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`Your server is running on port ${port}`));
