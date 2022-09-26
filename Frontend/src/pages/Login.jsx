@@ -3,13 +3,11 @@ import { FaUser } from "react-icons/fa";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
-    password2: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { email, password } = formData;
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -33,14 +31,6 @@ const Login = () => {
       <section>
         <form onSubmit={onSubmit}>
           <input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            placeholder="Enter your name."
-            onChange={onChange}
-          />
-          <input
             type="email"
             id="email"
             name="email"
@@ -54,14 +44,6 @@ const Login = () => {
             name="password"
             value={password}
             placeholder="Enter password."
-            onChange={onChange}
-          />
-          <input
-            type="password"
-            id="passwrod2"
-            name="password2"
-            value={password2}
-            placeholder="Confirm password"
             onChange={onChange}
           />
           <button type="submit">Submit</button>
