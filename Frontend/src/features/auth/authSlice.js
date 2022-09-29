@@ -26,13 +26,32 @@ export const register = createAsyncThunk(
   }
 );
 
+export const login = createAsyncThunk(
+  "auth/login",
+  async (user, thunkApi) => {
+    try {
+      await authService.login(user);
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString();
+      return thunkApi.rejectWithValue(message);
+    }
+  }
+);
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await authService.logout();
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     reset: (state) => {
       state.isLoading = false;
-      state.isSucces = false;
+      state.isSuccess = false;
       state.isError = false;
       state.message = "";
     },
@@ -40,17 +59,34 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state) => {
-        state.isLoding = true;
+        state.isLoading = true;
       })
-      .addCase(register.fullfilled, (state, action) => {
-        state.isLoding = false;
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
       })
       .addCase(register.rejected, (state, action) => {
-        state.isLoding = false;
+        state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(logout.fulfilled, (state) => {
         state.user = null;
       });
   },
