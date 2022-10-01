@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
+import './styles/register.scss';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -66,7 +67,7 @@ const Register = () => {
         </h1>
         <p>Please create an account.</p>
       </section>
-      <section>
+      <section className="form-container">
         <form onSubmit={onSubmit}>
           <input
             type="text"

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncthunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import goalService from './goalService';
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
     message: '',
 };
 
-export const createGoal = createAsyncthunk('goals/create', async (goalData, thunkAPI) => {
+export const createGoal = createAsyncThunk('goals/create', async (goalData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token;
         return await goalService.createGoal(goalData, token);
@@ -22,7 +22,7 @@ export const createGoal = createAsyncthunk('goals/create', async (goalData, thun
     }
 });
 
-export const getGoals = createAsyncthunk('goals/getAll', async (_, thunkAPI) => {
+export const getGoals = createAsyncThunk('goals/getAll', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token;
         return await goalService.getGoals(token);
@@ -35,7 +35,7 @@ export const getGoals = createAsyncthunk('goals/getAll', async (_, thunkAPI) => 
     }
 });
 
-export const deleteGoal = createAsyncthunk(
+export const deleteGoal = createAsyncThunk(
   "goals/delete",
   async (id, thunkAPI) => {
     try {
